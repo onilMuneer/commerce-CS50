@@ -1,0 +1,159 @@
+body {
+    padding: 10px;
+}
+
+#listingContainer:hover{
+  border: 1px solid black;
+}
+
+.productDiv{
+  padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.container{
+  margin-right: auto;
+  margin-left: auto;
+}
+.productLink:link{
+  text-decoration: none;
+  color: black;
+}
+.productLink:visited{
+  text-decoration: none;
+  color: black;
+}
+.priceDiv{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.price{
+  color: green;
+}
+
+.extraInfo{
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.basicInfo{
+  word-wrap: break-word;
+}
+
+.listingImg{
+  width: auto;
+  height: 120px;
+}
+.listingImage{
+  width: 50%;
+  height: auto;
+}
+
+ul.errorlist > li{
+  color: red;
+}
+
+.optionBtn{
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+#watchingBtn{
+  border: 3px solid blue;
+  border-radius: 5px;
+  background-color: white;
+}
+
+#watchingBtn:hover{
+  background-color: blue;
+  color: white;
+}
+
+#closeBtn{
+  color: red;
+  border: 3px solid red;
+  border-radius: 5px;
+  background-color: white;
+}
+
+#closeBtn:hover{
+  color: white;
+  background-color: red;
+}
+
+#bidBtn{
+  border: 3px solid green;
+  border-radius: 5px;
+  color: green;
+}
+
+#bidBtn:hover{
+  color: white;
+  background-color: green;
+}
+
+.bidsForm > label::after{
+  content:"$";
+  color: green;
+}
+
+.commentsField{
+  background-color: #f2f2f2;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.commentDiv{
+  word-wrap: break-word;
+  margin-bottom: 25px;
+}
+
+.newProductDiv > form > input , .newProductDiv > form > textarea, .newProductDiv > form > select{
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.winingMessage{
+  width: 70%;
+  background-color: green;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.closedAuction{
+  width: 70%;
+  text-align: center;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.closedAuction > span{
+  color:red;
+}
+#wineer{
+  color: green;
+}
+
+#submitCommentBtn{
+  margin-bottom: 25px;
+}
+
+.commentForm > input{
+display: block;
+}
+
+h3 > small{
+  font-size: medium;
+  color: grey;
+}

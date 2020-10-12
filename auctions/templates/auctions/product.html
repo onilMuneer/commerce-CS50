@@ -1,0 +1,127 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}product.title{% endblock %}
+
+{% block body %}
+
+{%if product.wineer == user%}
+  <h3 class="winingMessage">congrats you are the winner</h3>
+  {%elif product.closed %}
+  <h3 class="closedAuction">auction <span>closed</span> and the winner is <span id="wineer">{{product.wineer}}</span></h3>
+  {%endif%}
+
+    <div class="container-fluid overview">
+      <div class="row">
+
+        <div class="listingName col-xs-12 col-sm-8">
+          <h2>Listing: {{ product.title }}</h2>
+          <h6 style="color:grey">Listed by {{product.creator}}</h6>
+          <h6 style="color:grey">product id = {{product.id}}</h6>
+        </div>
+
+
+        <div class="options col-xs-12 col-sm-4 ">
+            <div class="row">
+              {% if user.is_authenticated %}
+                <form class="optionBtn" action="{% url 'product' product.id%}" method="post">
+              {% csrf_token %}
+
+                <input type="submit" name="watch" id="watchingBtn"
+                {% if user in product.watched.all %}
+                value="remove from watchlist"
+                {%else%}
+                value="Add to watchlist"
+                {%endif%}>
+                </form>
+
+                {%if not product.closed and product.creator == user%}
+                <form class="optionBtn" action="{% url 'product' product.id%}" method="post">
+                  {% csrf_token %}
+                  <input id="closeBtn" type="submit" name="close" value="close auction">
+                </form>
+                {%endif%}
+
+                {%endif%}
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    {%if product.imageUrl%}
+      <img src="{{product.imageUrl}}" alt="" class="listingImage">
+    {%endif%}
+    <br>
+
+    <div class="container-fluid">
+
+
+      <h6>Start from ${{product.startingPrice}}</h6>
+      <h3>
+        {% if product.bids.all%}
+         Current price: ${{product.currentBid}}
+         <small>{{product.bids.count}} total bid(s)</small>
+         {% for bid in product.bids.all %}
+           {% if user == bid.bider and bid.price == product.currentBid %}
+           <small>, your bid is the current bid</small>
+           {%endif%}
+         {%endfor%}
+        {%else%}
+          no bids
+        {%endif%}
+      </h3>
+
+
+
+
+
+      {% if user.is_authenticated and not product.closed%}
+      <form class="bidsForm"action="{% url 'product' product.id%}" method="post">
+        {% csrf_token %}
+        {{bidForm}}
+        <input type="hidden" name="listing" value="{{product.id}}">
+        <input type="hidden" name="bider" value="{{user.pk}}">
+        <input type="submit" name="bid" value="place bid" id="bidBtn">
+      </form>
+       {%endif%}
+       <br>
+       <br>
+       <h5>Category:
+         <a href="{% url 'category' product.get_category_display %}">{{ product.get_category_display}}</a>
+       </h5>
+      <h5>Description</h5>
+      <p>{{ product.description }}</p>
+
+
+
+      <br>
+
+      <h2>comments</h2>
+      <hr style="background-color:black">
+
+      {%if user.is_authenticated%}
+      <h4>add commment</h4>
+      <form class="commentForm" action="{% url 'product' product.id %}" method="post">
+       {% csrf_token %}
+        <textarea name="comment" cols="50" rows="5" maxlength="500" required></textarea>
+        <input type="hidden" name="product" value="{{ product.id }}">
+        <input id="submitCommentBtn" type="submit" value="submit">
+      </form>
+      {%endif%}
+
+        </div>
+        {% for comment in product.cmts.all reversed %}
+          <div class="container-fluid commentDiv">
+            <strong>{{ comment.commenter}}</strong><small>  {{comment.dateCreated}}</small>
+            <br>
+            <span class="commentsField">{{comment.comment}}</span>
+          </div>
+        {% endfor %}
+
+    </div>
+
+
+
+
+{% endblock %}

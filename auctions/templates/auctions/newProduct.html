@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}New listing{% endblock %}
+
+{% block body %}
+
+<div class="container fluid newProductDiv">
+  <form class="" action="{% url 'create'%}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="hidden" name="creator" value="{{user.pk}}">
+    <input type="submit" name="submit" value="save">
+  </form>
+</div>
+
+{% endblock %}

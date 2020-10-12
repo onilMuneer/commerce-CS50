@@ -1,0 +1,7 @@
+{% extends "auctions/index.html" %}
+
+  {% block title %}Categories{% endblock %}
+
+    {% block heading %}<h2>{{listings.0.get_category_display}}</h2>{% endblock %}
+
+    {% block empty%}<h4>not current active listings for this category, please try again later</h4>{% endblock %}
